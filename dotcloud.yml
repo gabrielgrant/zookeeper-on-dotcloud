@@ -1,0 +1,14 @@
+zkclient:
+    type: custom
+    buildscript: zkclient/builder
+    systempackages:
+        - ant
+zookeeper:
+    type: custom
+    buildscript: zookeeper/builder
+    postinstall: zookeeper/postinstall
+    ports:
+        connection: tcp
+        election: tcp
+    processes:
+        zookeeper: zookeeper/bin/zkServer.sh start-foreground

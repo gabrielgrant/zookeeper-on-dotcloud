@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cd zkclient
+[ -d ~/virtualenv ] ||
+    virtualenv --python=python2.7 ~/virtualenv
+. ~/virtualenv/bin/activate
+[ -f requirements.txt ] &&
+    pip install --download-cache=~/.pip-cache --use-mirrors -r requirements.txt
+
+cat >>~/profile <<EOF
+. ~/virtualenv/bin/activate
+EOF
+
+if [ -f ~/.zkpy_installed ]
+then
+    echo "Zookeeper Python bindings already installed"
+else
+    echo "Building Zookeeper C bindings"
+    wget -O /tmp/zookeeper-3.4.3.tar.gz http://apache.mesi.com.ar//zookeeper/current/zookeeper-3.4.3.tar.gz
+    tar -zxf /tmp/zookeeper-3.4.3.tar.gz -C /tmp/
+    cd /tmp/zookeeper-3.4.3/src/c
+    ./configure --prefix=/home/dotcloud/virtualenv
+    make
+    make install
+    cat >>~/profile <<EOF
+export LD_LIBRARY_PATH=/home/dotcloud/virtualenv/lib:$LD_LIBRARY_PATH
+EOF
+    
+    echo "Building Zookeeper Python bindings"
+    cd ../contrib/zkpython
+    ant install
+    
+    touch ~/.zkpy_installed
+fi

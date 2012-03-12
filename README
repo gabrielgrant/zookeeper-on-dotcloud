@@ -1,0 +1,23 @@
+Zookeeper[1] maintains configuration information, naming,
+and provides synchronization for distributed systems.
+
+[1]: http://zookeeper.apache.org/
+
+How to use it (standalone)
+--------------------------
+
+Clone the repo and push to dotCloud:
+
+    git clone https://github.com/gabrielgrant/zookeeper-on-dotcloud.git
+    dotcloud push myzookeeper zookeeper-on-dotcloud
+
+At the end of the push, you can find the URL of your Zookeeper instance
+by running `dotcloud info myzookeeper`
+
+How to use it in your app
+-------------------------
+
+Add the contents of the dotcloud.yml supplied here to your own dotcloud.yml,
+and copy the `zookeeper` directory into your repository. Push as
+usual, and the Zookeeper URL will be made available to your app through
+the standard dotCloud environment information mechanisms.
