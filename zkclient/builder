@@ -16,9 +16,9 @@ then
     echo "Zookeeper Python bindings already installed"
 else
     echo "Building Zookeeper C bindings"
-    wget -O /tmp/zookeeper-3.4.3.tar.gz http://apache.mesi.com.ar//zookeeper/current/zookeeper-3.4.3.tar.gz
-    tar -zxf /tmp/zookeeper-3.4.3.tar.gz -C /tmp/
-    cd /tmp/zookeeper-3.4.3/src/c
+    wget -O /tmp/zookeeper-3.4.5.tar.gz http://apache.mesi.com.ar//zookeeper/current/zookeeper-3.4.5.tar.gz
+    tar -zxf /tmp/zookeeper-3.4.5.tar.gz -C /tmp/
+    cd /tmp/zookeeper-3.4.5/src/c
     ./configure --prefix=/home/dotcloud/virtualenv
     make
     make install
